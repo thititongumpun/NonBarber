@@ -8,20 +8,20 @@ export const CallbackPage = () => {
   const navigate = useNavigate();
 	const shouldRedirect = useRef(true);
 
-  // useEffect(() => {
-	// 	if (shouldRedirect.current) {
-	// 		shouldRedirect.current = false;
+  useEffect(() => {
+		if (shouldRedirect.current) {
+			shouldRedirect.current = false;
 
-	// 		(async () => {
-	// 			try {
-	// 				await handleRedirectCallback("/");
-	// 				navigate("/");
-	// 			} catch (e) {
-	// 				navigate('/');
-	// 			}
-	// 		})();
-	// 	}
-	// }, [navigate]);
+			(async () => {
+				try {
+					await handleRedirectCallback();
+					navigate("/");
+				} catch (e) {
+					navigate('/');
+				}
+			})();
+		}
+	}, [navigate]);
 
   if (error) {
     return (
