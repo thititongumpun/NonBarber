@@ -14,7 +14,6 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      {/* <HomePage /> */}
       <Route path="/profile" element={<AuthenticationGuard component={ProfilePage} />} />
       <Route path="/callback" element={<CallbackPage />} />
     </Routes>

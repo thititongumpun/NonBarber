@@ -72,7 +72,7 @@ const Header = () => {
             {isAuthenticated && (
               <>
                 <LogoutButton />
-                <span className="text-white">{user?.email}</span>
+                <span className="text-white" onClick={() => navigate("/profile")}>{user?.email}</span>
               </>
             )}
           </div>

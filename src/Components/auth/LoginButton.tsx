@@ -6,11 +6,12 @@ const LoginButton = () => {
   const handleLogin = async () => {
     await loginWithRedirect({
       appState: {
-        returnTo: "/profile",
+        returnTo: "/" ,
       },
       authorizationParams: {
         prompt: "login",
       },
+      
     });
   };
   return <button className="text-white" onClick={handleLogin}>Login</button>;
