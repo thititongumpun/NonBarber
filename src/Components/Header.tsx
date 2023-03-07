@@ -4,10 +4,12 @@ import toast from "react-hot-toast";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "./auth/LoginButton";
 import LogoutButton from "./auth/LogoutButton";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const { isAuthenticated } = useAuth0();
   const { user } = useAuth0();
+  const navigate = useNavigate();
   const handlePhoneIconCick = () => {
     toast.custom((t) => (
       <div
@@ -50,7 +52,10 @@ const Header = () => {
         <nav className="flex h-20 w-full items-center justify-between p-8">
           <div className="flex items-center">
             <img src={logo} alt="logo" className="h-16 w-20" />
-            <h1 className="text-md font-bold uppercase text-white md:text-2xl">
+            <h1
+              className="text-md font-bold uppercase text-white hover:cursor-pointer md:text-2xl"
+              onClick={() => navigate("/")}
+            >
               Non Barber
             </h1>
           </div>
@@ -67,7 +72,7 @@ const Header = () => {
             {isAuthenticated && (
               <>
                 <LogoutButton />
-                <span className="profile__description">{user?.email}</span>
+                <span className="text-white">{user?.email}</span>
               </>
             )}
           </div>
