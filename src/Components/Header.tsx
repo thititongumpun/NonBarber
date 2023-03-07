@@ -1,8 +1,13 @@
 import logo from "../assets/n.png";
 import { PhoneIcon, ClockIcon } from "@heroicons/react/20/solid";
 import toast from "react-hot-toast";
+import { useAuth0 } from "@auth0/auth0-react";
+import LoginButton from "./auth/LoginButton";
+import LogoutButton from "./auth/LogoutButton";
 
 const Header = () => {
+  const { isAuthenticated } = useAuth0();
+  const { user } = useAuth0();
   const handlePhoneIconCick = () => {
     toast.custom((t) => (
       <div
@@ -55,7 +60,16 @@ const Header = () => {
               onClick={handlePhoneIconCick}
             />
             <ClockIcon className="h-6 w-6 text-white" />
-            <h4 className="uppercase text-white underline ">Book Now</h4>
+            <h4 className="hidden uppercase text-white underline md:block">
+              Book Now
+            </h4>
+            {!isAuthenticated && <LoginButton />}
+            {isAuthenticated && (
+              <>
+                <LogoutButton />
+                <span className="profile__description">{user?.email}</span>
+              </>
+            )}
           </div>
         </nav>
       </header>

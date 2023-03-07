@@ -2,7 +2,7 @@ const CTA = () => {
   return (
     <>
       <main className="flex flex-col items-center justify-center bg-white md:h-screen">
-        <div className="flex flex-col space-y-6 text-center">
+        <div className="flex flex-col space-y-6 text-center p-4 mt-5">
           <h1 className="text-lg font-bold uppercase tracking-widest text-[#af8c45]">
             Welcome to NonBarber
           </h1>
