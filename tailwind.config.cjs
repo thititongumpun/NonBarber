@@ -10,7 +10,7 @@ module.exports = {
         sans: ["Ubuntu, sans-serif"],
       },
       backgroundImage: {
-        hero: "url('./src/assets/shave-feature-1.jpg')",
+        hero: "url('assets/shave-feature-1.jpg')",
       },
     },
   },
