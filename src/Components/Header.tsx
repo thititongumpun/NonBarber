@@ -5,6 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "./auth/LoginButton";
 import LogoutButton from "./auth/LogoutButton";
 import { useNavigate } from "react-router-dom";
+import Slider from "react-slick";
 
 const Header = () => {
   const { isAuthenticated } = useAuth0();
@@ -48,7 +49,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="relative top-0 flex bg-gray">
+      <header className="sticky top-0 z-50 flex bg-gray">
         <nav className="flex h-20 w-full items-center justify-between p-8">
           <div className="flex items-center">
             <img src={logo} alt="logo" className="h-16 w-20" />
@@ -72,7 +73,12 @@ const Header = () => {
             {isAuthenticated && (
               <>
                 <LogoutButton />
-                <span className="text-white" onClick={() => navigate("/profile")}>{user?.email}</span>
+                <span
+                  className="text-white"
+                  onClick={() => navigate("/profile")}
+                >
+                  {user?.email}
+                </span>
               </>
             )}
           </div>

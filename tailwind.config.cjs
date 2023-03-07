@@ -11,6 +11,7 @@ module.exports = {
       },
       backgroundImage: {
         hero: "url('assets/shave-feature-1.jpg')",
+        hero2: "url('assets/shave-feature-2.jpg')",
       },
     },
   },
