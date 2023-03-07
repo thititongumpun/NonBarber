@@ -5,8 +5,6 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { Auth0ProviderWithNavigate } from "./Auth/auth0-provider";
 import "./index.css";
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css";
 import 'swiper/css';
 import "swiper/css/bundle"
 
