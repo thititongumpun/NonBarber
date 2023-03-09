@@ -8,10 +8,16 @@ import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { getAllOpenHours } from "../api/openHours";
 import { useQuery } from "react-query";
+import { useTranslation } from "react-i18next";
+import ChangeLanguageButton from "./ChangeLanguageButton";
 
 const Header = () => {
   const { isAuthenticated } = useAuth0();
   const { user, logout } = useAuth0();
+  const { t, i18n } = useTranslation();
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+  };
   const navigate = useNavigate();
   const classNames = (...classes: string[]) => {
     return classes.filter(Boolean).join(" ");
@@ -107,10 +113,10 @@ const Header = () => {
           <div className="flex items-center">
             <img src={logo} alt="logo" className="h-16 w-20" />
             <h1
-              className="text-md font-bold uppercase text-white hover:cursor-pointer md:text-2xl"
+              className="text-md hidden font-bold uppercase text-white hover:cursor-pointer md:block md:text-2xl"
               onClick={() => navigate("/")}
             >
-              Non Barber
+              {t("title")}
             </h1>
           </div>
           <div className="flex items-center gap-4 hover:cursor-pointer">
@@ -123,7 +129,7 @@ const Header = () => {
               onClick={handleClockIconCick}
             />
             <h4 className="hidden uppercase text-white underline md:block">
-              Book Now
+              {t("book_now")}
             </h4>
             {!isAuthenticated && <LoginButton />}
             {isAuthenticated && (
@@ -191,6 +197,7 @@ const Header = () => {
                 </Transition>
               </Menu>
             )}
+            <ChangeLanguageButton />
           </div>
         </nav>
       </header>

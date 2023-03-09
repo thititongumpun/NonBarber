@@ -6,6 +6,7 @@ import App from "./App";
 import { Auth0ProviderWithNavigate } from "./Auth/auth0-provider";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import "./i18n/config";
 import "./index.css";
 import "swiper/css";
 import "swiper/css/bundle";
