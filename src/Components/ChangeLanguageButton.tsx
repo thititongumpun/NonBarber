@@ -2,13 +2,14 @@ import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { useTranslation } from "react-i18next";
+import ReactCountryFlag from "react-country-flag";
 
 const ChangeLanguageButton = () => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
   };
-
+  
   const classNames = (...classes: string[]) => {
     return classes.filter(Boolean).join(" ");
   };
@@ -16,12 +17,24 @@ const ChangeLanguageButton = () => {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
-        <Menu.Button className="text-gray-900 ring-gray-300 hover:bg-gray-50 inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset">
-          EN
-          <ChevronDownIcon
-            className="text-gray-400 -mr-1 h-5 w-5"
-            aria-hidden="true"
-          />
+        <Menu.Button className="text-gray-900 inline-flex w-full justify-center gap-x-1.5 rounded-lg bg-gray px-3 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset ring-gray hover:bg-gray">
+          {i18n.language === "en" ? (
+            <ReactCountryFlag
+              countryCode="US"
+              style={{
+                fontSize: "2em",
+                lineHeight: "2em",
+              }}
+            />
+          ) : (
+            <ReactCountryFlag
+              countryCode="TH"
+              style={{
+                fontSize: "2em",
+                lineHeight: "2em",
+              }}
+            />
+          )}
         </Menu.Button>
       </div>
 
@@ -34,7 +47,7 @@ const ChangeLanguageButton = () => {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="absolute right-0 z-10 mt-2 w-auto origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
             <Menu.Item>
               {({ active }) => (
@@ -44,9 +57,11 @@ const ChangeLanguageButton = () => {
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                     "block px-4 py-2 text-sm"
                   )}
-                  onClick={() => changeLanguage("en")}
                 >
-                  en
+                  <ReactCountryFlag
+                    countryCode="US"
+                    onClick={() => changeLanguage("en")}
+                  />
                 </button>
               )}
             </Menu.Item>
@@ -58,9 +73,11 @@ const ChangeLanguageButton = () => {
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                     "block px-4 py-2 text-sm"
                   )}
-                  onClick={() => changeLanguage("th")}
                 >
-                  th
+                  <ReactCountryFlag
+                    countryCode="TH"
+                    onClick={() => changeLanguage("th")}
+                  />
                 </button>
               )}
             </Menu.Item>

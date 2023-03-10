@@ -1,7 +1,7 @@
 const CTA = () => {
   return (
     <>
-      <main className="flex flex-col items-center justify-center bg-white md:h-screen">
+      <main className="flex flex-col items-center justify-center bg-white md:h-screen mx-auto mt-5 p-2">
         <div className="mt-5 flex flex-col space-y-6 p-4 text-center">
           <h1 className="text-lg font-bold uppercase tracking-widest text-[#af8c45]">
             Welcome to NonBarber
