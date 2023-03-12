@@ -19,7 +19,7 @@ i18next
   .init({
     returnNull: false,
     fallbackLng: 'en',
-    debug: true,
+    debug: false,
     supportedLngs: ['en', 'th'],
     ns: ['translation'],
     defaultNS,

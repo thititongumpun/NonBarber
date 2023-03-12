@@ -10,7 +10,6 @@ const ProfilePage = () => {
 
     const getMessage = async () => {
       const accessToken = await getAccessTokenSilently();
-      console.log(accessToken);
 
       if (!isMounted) {
         return;

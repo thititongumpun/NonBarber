@@ -1,6 +1,5 @@
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { useTranslation } from "react-i18next";
 import ReactCountryFlag from "react-country-flag";
 
@@ -9,7 +8,7 @@ const ChangeLanguageButton = () => {
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
   };
-  
+
   const classNames = (...classes: string[]) => {
     return classes.filter(Boolean).join(" ");
   };
@@ -19,21 +18,9 @@ const ChangeLanguageButton = () => {
       <div>
         <Menu.Button className="text-gray-900 inline-flex w-full justify-center gap-x-1.5 rounded-lg bg-gray px-3 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset ring-gray hover:bg-gray">
           {i18n.language === "en" ? (
-            <ReactCountryFlag
-              countryCode="US"
-              style={{
-                fontSize: "2em",
-                lineHeight: "2em",
-              }}
-            />
+            <img src="https://flagcdn.com/w80/us.jpg" className="w-10" />
           ) : (
-            <ReactCountryFlag
-              countryCode="TH"
-              style={{
-                fontSize: "2em",
-                lineHeight: "2em",
-              }}
-            />
+            <img src="https://flagcdn.com/w80/th.jpg" className="w-10" />
           )}
         </Menu.Button>
       </div>
@@ -58,8 +45,9 @@ const ChangeLanguageButton = () => {
                     "block px-4 py-2 text-sm"
                   )}
                 >
-                  <ReactCountryFlag
-                    countryCode="US"
+                  <img
+                    src="https://flagcdn.com/w80/us.jpg"
+                    className="w-10"
                     onClick={() => changeLanguage("en")}
                   />
                 </button>
@@ -74,8 +62,9 @@ const ChangeLanguageButton = () => {
                     "block px-4 py-2 text-sm"
                   )}
                 >
-                  <ReactCountryFlag
-                    countryCode="TH"
+                  <img
+                    src="https://flagcdn.com/w80/th.jpg"
+                    className="w-10"
                     onClick={() => changeLanguage("th")}
                   />
                 </button>

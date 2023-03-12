@@ -15,7 +15,6 @@ const Header = () => {
   const { isAuthenticated } = useAuth0();
   const { user, logout } = useAuth0();
   const { t, i18n } = useTranslation();
-  console.log(i18n.language === 'en-US');
   const navigate = useNavigate();
   const classNames = (...classes: string[]) => {
     return classes.filter(Boolean).join(" ");
