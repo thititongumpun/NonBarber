@@ -1,7 +1,6 @@
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { useTranslation } from "react-i18next";
-import ReactCountryFlag from "react-country-flag";
 
 const ChangeLanguageButton = () => {
   const { i18n } = useTranslation();
