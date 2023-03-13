@@ -1,11 +1,27 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Scrollbar, Autoplay, A11y, EffectFade } from "swiper";
+import {
+  Navigation,
+  Pagination,
+  Scrollbar,
+  Autoplay,
+  A11y,
+  EffectFade,
+} from "swiper";
+import { useTranslation } from "react-i18next";
 
 const Hero = () => {
+  const { t } = useTranslation();
   return (
     <main className="relative">
       <Swiper
-        modules={[Navigation, Pagination, Scrollbar, A11y, EffectFade, Autoplay]}
+        modules={[
+          Navigation,
+          Pagination,
+          Scrollbar,
+          A11y,
+          EffectFade,
+          Autoplay,
+        ]}
         spaceBetween={50}
         slidesPerView={1}
         navigation
@@ -20,18 +36,21 @@ const Hero = () => {
         <SwiperSlide>
           <div className="h-screen bg-hero bg-cover bg-center bg-no-repeat md:bg-cover">
             <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse text-3xl uppercase text-white md:text-6xl">
-              Master of the blade
-              asdsd
+              {t("slide_1")}
             </h1>
-            <p className="absolute top-1/2 left-1/2 mt-6 -translate-x-1/2 animate-pulse text-xs text-white md:text-sm">
-              Some description text. Some dummy text here. Welcome to
-              KindaCode.com
+            <p className="absolute top-1/2 left-1/2 mt-14 -translate-x-1/2 animate-pulse p-6 text-xs text-white md:text-sm">
+              {t("slide_1_subtitle")}
             </p>
           </div>
         </SwiperSlide>
         <SwiperSlide>
           <div className="h-screen bg-hero2 bg-cover bg-center bg-no-repeat md:bg-cover">
-            2
+            <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse text-3xl uppercase text-white md:text-6xl">
+              {t("slide_2")}
+            </h1>
+            <p className="absolute top-1/2 left-1/2 mt-14 -translate-x-1/2 animate-pulse p-6 text-xs text-white md:text-sm">
+              {t("slide_2_subtitle")}
+            </p>
           </div>
         </SwiperSlide>
       </Swiper>
