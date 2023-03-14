@@ -2,6 +2,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import AuthenticationGuard from "./Auth/AuthenticationGuard";
+import Layout from "./Components/Layout";
 import CallbackPage from "./pages/callback-page";
 import ProfilePage from "./pages/profile-page";
 
@@ -14,14 +15,16 @@ function App() {
     return <Loading />;
   }
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route
-        path="/profile"
-        element={<AuthenticationGuard component={ProfilePage} />}
-      />
-      <Route path="/callback" element={<CallbackPage />} />
-    </Routes>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/profile"
+          element={<AuthenticationGuard component={ProfilePage} />}
+        />
+        <Route path="/callback" element={<CallbackPage />} />
+      </Routes>
+    </Layout>
   );
 }
 

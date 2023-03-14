@@ -5,16 +5,17 @@ import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "./auth/LoginButton";
 import { useNavigate } from "react-router-dom";
 import { Menu, Transition } from "@headlessui/react";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { getAllOpenHours } from "../api/openHours";
 import { useQuery } from "react-query";
 import { useTranslation } from "react-i18next";
 import ChangeLanguageButton from "./ChangeLanguageButton";
+import Modal from "./Modal/Modal";
 
 const Header = () => {
   const { isAuthenticated } = useAuth0();
   const { user, logout } = useAuth0();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const classNames = (...classes: string[]) => {
     return classes.filter(Boolean).join(" ");
@@ -108,7 +109,12 @@ const Header = () => {
       <header className="sticky top-0 z-50 flex bg-gray">
         <nav className="flex h-20 w-full items-center justify-between p-8">
           <div className="flex items-center">
-            <img src={logo} alt="logo" className="h-16 w-20" />
+            <img
+              src={logo}
+              alt="logo"
+              className="h-16 w-20 cursor-pointer"
+              onClick={() => navigate("/")}
+            />
             <h1
               className="text-md hidden font-bold uppercase text-white hover:cursor-pointer md:block md:text-2xl"
               onClick={() => navigate("/")}
@@ -125,9 +131,7 @@ const Header = () => {
               className="h-6 w-6 text-white"
               onClick={handleClockIconCick}
             />
-            <h4 className="hidden uppercase text-white underline md:block">
-              {t("book_now")}
-            </h4>
+            <Modal title={t("book_now")}>y0</Modal>
             {!isAuthenticated && <LoginButton />}
             {isAuthenticated && (
               <Menu as="div" className="relative ml-3">
@@ -137,7 +141,7 @@ const Header = () => {
                     <img
                       className="h-8 w-8 rounded-full"
                       src={user?.picture}
-                      alt=""
+                      alt={user?.picture}
                     />
                   </Menu.Button>
                 </div>

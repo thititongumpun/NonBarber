@@ -39,6 +39,7 @@ const CTA = () => {
             </p>
           </div>
         </section>
+        {/* <Modal title="book now">Yo</Modal> */}
       </main>
     </>
   );

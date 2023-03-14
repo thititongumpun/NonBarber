@@ -38,7 +38,7 @@ const Hero = () => {
             <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse text-3xl uppercase text-white md:text-6xl">
               {t("slide_1")}
             </h1>
-            <p className="absolute top-1/2 left-1/2 mt-14 -translate-x-1/2 animate-pulse p-6 text-xs text-white md:text-sm">
+            <p className="absolute top-1/2 left-1/2 mt-4 -translate-x-1/2 animate-pulse p-6 text-xs text-white md:mt-4 md:text-sm">
               {t("slide_1_subtitle")}
             </p>
           </div>
@@ -48,7 +48,7 @@ const Hero = () => {
             <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse text-3xl uppercase text-white md:text-6xl">
               {t("slide_2")}
             </h1>
-            <p className="absolute top-1/2 left-1/2 mt-14 -translate-x-1/2 animate-pulse p-6 text-xs text-white md:text-sm">
+            <p className="absolute top-1/2 left-1/2 mt-4 -translate-x-1/2 animate-pulse p-6 text-xs text-white md:mt-4 md:text-sm">
               {t("slide_2_subtitle")}
             </p>
           </div>
