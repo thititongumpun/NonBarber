@@ -1,5 +1,7 @@
 import { useState, Fragment, Dispatch, SetStateAction } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { useTranslation } from "react-i18next";
+import Datepicker from "react-tailwindcss-datepicker";
 
 type ModalProps = {
   children?: React.ReactNode;
@@ -9,6 +11,8 @@ type ModalProps = {
 const Modal = ({ children, title }: ModalProps) => {
   let [isOpen, setIsOpen] = useState(false);
 
+  const { t } = useTranslation();
+
   function closeModal() {
     setIsOpen(false);
   }
@@ -16,6 +20,7 @@ const Modal = ({ children, title }: ModalProps) => {
   function openModal() {
     setIsOpen(true);
   }
+
   return (
     <>
       <h4 className="hidden uppercase text-white underline md:block">
@@ -52,9 +57,9 @@ const Modal = ({ children, title }: ModalProps) => {
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
-                    className="text-gray-900 text-lg font-medium leading-6"
+                    className="text-gray-900 text-center text-lg font-medium leading-6"
                   >
-                    Payment successful
+                    {t("book_modal_title")}
                   </Dialog.Title>
                   <div className="mt-2">
                     <p className="text-gray-500 text-sm">
@@ -62,7 +67,6 @@ const Modal = ({ children, title }: ModalProps) => {
                       you an email with all of the details of your order.
                     </p>
                   </div>
-
                   <div className="mt-4">
                     <button
                       type="button"

@@ -1,12 +1,14 @@
 import { AppState, Auth0Provider } from "@auth0/auth0-react";
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import { useNavigate } from "react-router-dom";
 
 type Auth0ProviderProps = {
   children: React.ReactNode;
 };
 
-export const Auth0ProviderWithNavigate = ({ children }: Auth0ProviderProps) => {
+export const Auth0ProviderWithNavigate = ({
+  children,
+}: PropsWithChildren<Auth0ProviderProps>): JSX.Element | null => {
   const navigate = useNavigate();
 
   const domain = import.meta.env.VITE_AUTH0_DOMAIN;

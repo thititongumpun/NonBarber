@@ -1,5 +1,6 @@
 import { withAuthenticationRequired } from "@auth0/auth0-react";
 import Loading from "../Components/Loading";
+import React from "react";
 
 type AuthenticationGuardProps = {
   component: React.ComponentType<Object>;
