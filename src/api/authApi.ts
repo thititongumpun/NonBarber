@@ -10,7 +10,6 @@ export const getMe = async (accessToken: string) => {
       Authorization: `Bearer ${accessToken}`,
     },
   }
-  // const { data } = await axios.get<string>('http://localhost:5132/WeatherForecast/me', config);
-  const { data } = await axios.get<string>('https://nonbarberapi.onrender.com/WeatherForecast/me', config);
+  const { data } = await baseAPI.get<string[]>("/WeatherForecast/me", config);
   return data;
 };

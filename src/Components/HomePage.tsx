@@ -5,10 +5,10 @@ import CTA from "./CTA";
 import Hero from "./Hero";
 
 const HomePage = () => {
-  const { getAccessTokenSilently } = useAuth0();
-  const accessToken = getAccessTokenSilently();
-  const { data } = useQuery("me", async () => getMe(await accessToken));
-  console.log(data);
+  // const { getAccessTokenSilently } = useAuth0();
+  // const accessToken = getAccessTokenSilently();
+  // const { data } = useQuery("me", async () => getMe(await accessToken));
+  // console.log(data);
 
   return (
     <div className="scroll-smooth">
