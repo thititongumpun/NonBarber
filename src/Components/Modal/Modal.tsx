@@ -30,7 +30,7 @@ const Modal = ({ children, title }: ModalProps) => {
       </h4>
 
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+        <Dialog as="div" className="relative z-10 w-[500px]" onClose={closeModal}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -61,21 +61,7 @@ const Modal = ({ children, title }: ModalProps) => {
                   >
                     {t("book_modal_title")}
                   </Dialog.Title>
-                  <div className="mt-2">
-                    <p className="text-gray-500 text-sm">
-                      Your payment has been successfully submitted. We’ve sent
-                      you an email with all of the details of your order.
-                    </p>
-                  </div>
-                  <div className="mt-4">
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}
-                    >
-                      Got it, thanks!
-                    </button>
-                  </div>
+                  {children}
                 </Dialog.Panel>
               </Transition.Child>
             </div>

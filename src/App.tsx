@@ -5,6 +5,8 @@ import AuthenticationGuard from "./Auth/AuthenticationGuard";
 import Layout from "./Components/Layout";
 import CallbackPage from "./pages/callback-page";
 import ProfilePage from "./pages/profile-page";
+import ReservePage from "./pages/reserve-page";
+import SettingPage from "./pages/setting-page";
 
 const HomePage = lazy(() => import("./Components/HomePage"));
 const Loading = lazy(() => import("./Components/Loading"));
@@ -22,6 +24,11 @@ function App() {
           path="/profile"
           element={<AuthenticationGuard component={ProfilePage} />}
         />
+        <Route
+          path="/setting"
+          element={<AuthenticationGuard component={SettingPage} />}
+        />
+        <Route path="/reserve" element={<ReservePage />} />
         <Route path="/callback" element={<CallbackPage />} />
       </Routes>
     </Layout>

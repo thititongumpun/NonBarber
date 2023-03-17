@@ -10,13 +10,14 @@ import { getAllOpenHours } from "../api/openHours";
 import { useQuery } from "react-query";
 import { useTranslation } from "react-i18next";
 import ChangeLanguageButton from "./ChangeLanguageButton";
-import Modal from "./Modal/Modal";
+import { Button } from "flowbite-react";
 
 const Header = () => {
   const { isAuthenticated } = useAuth0();
   const { user, logout } = useAuth0();
   const { t } = useTranslation();
   const navigate = useNavigate();
+
   const classNames = (...classes: string[]) => {
     return classes.filter(Boolean).join(" ");
   };
@@ -24,6 +25,42 @@ const Header = () => {
   const { isLoading, data: openHours } = useQuery("openHours", () =>
     getAllOpenHours()
   );
+
+  const options = {
+    title: "Demo Title",
+    autoHide: true,
+    todayBtn: false,
+    clearBtn: true,
+    maxDate: new Date("2030-01-01"),
+    minDate: new Date("1950-01-01"),
+    theme: {
+      background: "bg-gray-700 ",
+      todayBtn: "",
+      clearBtn: "",
+      icons: "",
+      text: "",
+      disabledText: "bg-red-500",
+      input: "",
+      inputIcon: "",
+      selected: "",
+    },
+    icons: {
+      // () => ReactElement | JSX.Element
+      prev: () => <span>Previous</span>,
+      next: () => <span>Next</span>,
+    },
+    datepickerClassNames: "top-12",
+    defaultDate: new Date("2022-01-01"),
+    language: "en",
+  };
+
+  const [show, setShow] = useState<boolean>(false);
+  const handleChange = (selectedDate: Date) => {
+    console.log(selectedDate);
+  };
+  const handleClose = (state: boolean) => {
+    setShow(state);
+  };
 
   const handleClockIconCick = () => {
     if (!isLoading)
@@ -131,7 +168,9 @@ const Header = () => {
               className="h-6 w-6 text-white"
               onClick={handleClockIconCick}
             />
-            <Modal title={t("book_now")}>y0</Modal>
+            <Button onClick={() => navigate("/reserve")}>
+              {t("book_now")}
+            </Button>
             {!isAuthenticated && <LoginButton />}
             {isAuthenticated && (
               <Menu as="div" className="relative ml-3">
@@ -171,7 +210,7 @@ const Header = () => {
                     <Menu.Item>
                       {({ active }) => (
                         <a
-                          href="#"
+                        onClick={() => navigate("/setting")}
                           className={classNames(
                             active ? "bg-gray-100" : "",
                             "text-gray-700 block px-4 py-2 text-sm"

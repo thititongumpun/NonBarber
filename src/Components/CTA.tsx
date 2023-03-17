@@ -1,29 +1,9 @@
-import { useState } from "react";
-import Datepicker from "react-tailwindcss-datepicker";
-
 const CTA = () => {
-  const [value, setValue] = useState({
-    startDate: new Date(),
-    endDate: new Date(),
-  });
-
-  const handleValueChange = (newValue: any) => {
-    console.log("newValue:", newValue);
-    setValue(newValue);
-  };
   return (
     <>
       <main className="mx-auto mt-5 flex flex-col items-center justify-center bg-white p-2 md:h-screen">
         <div className="mt-5 flex flex-col space-y-6 p-4 text-center">
-          <div className="mx-auto">
-            <Datepicker
-              primaryColor={"blue"}
-              value={value}
-              asSingle={true}
-              onChange={handleValueChange}
-              showShortcuts={true}
-            />
-          </div>
+          <div className="mx-auto"></div>
           <h1 className="text-lg font-bold uppercase tracking-widest text-[#af8c45]">
             Welcome to NonBarber
           </h1>

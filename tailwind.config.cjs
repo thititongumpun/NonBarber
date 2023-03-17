@@ -3,7 +3,8 @@ module.exports = {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js",
+    "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}",
+    "./node_modules/tailwind-datepicker-react/dist/**/*.js", 
   ],
   theme: {
     extend: {
@@ -19,5 +20,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("prettier-plugin-tailwindcss")],
+  plugins: [require("prettier-plugin-tailwindcss"), require("flowbite/plugin")],
 };
