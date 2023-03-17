@@ -1,7 +1,6 @@
 import { useState, Fragment, Dispatch, SetStateAction } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useTranslation } from "react-i18next";
-import Datepicker from "react-tailwindcss-datepicker";
 
 type ModalProps = {
   children?: React.ReactNode;
