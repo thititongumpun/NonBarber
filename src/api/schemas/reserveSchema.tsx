@@ -5,7 +5,7 @@ export const reserveSchema = z.object({
   reserveDate: z.date().optional(),
   reserveTime: z.string().datetime().optional(),
   createdDate: z.string().datetime().optional(),
-  userId: z.string()
+  userId: z.string().optional()
 });
 
 export type ReserveSchemaType = z.infer<typeof reserveSchema>;

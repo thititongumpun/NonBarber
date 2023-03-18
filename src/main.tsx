@@ -11,7 +11,15 @@ import "./index.css";
 import "swiper/css";
 import "swiper/css/bundle";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 3,
+      retryDelay: 3000,
+      staleTime: 5 * 1000,
+    },
+  },
+});
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>

@@ -1,5 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import AuthenticationGuard from "./Auth/AuthenticationGuard";
 import Layout from "./Components/Layout";
@@ -13,24 +13,28 @@ const Loading = lazy(() => import("./Components/Loading"));
 
 function App() {
   const { isLoading } = useAuth0();
+
   if (isLoading) {
     return <Loading />;
   }
+
   return (
     <Layout>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route
-          path="/profile"
-          element={<AuthenticationGuard component={ProfilePage} />}
-        />
-        <Route
-          path="/setting"
-          element={<AuthenticationGuard component={SettingPage} />}
-        />
-        <Route path="/reserve" element={<ReservePage />} />
-        <Route path="/callback" element={<CallbackPage />} />
-      </Routes>
+      <Suspense fallback={<Loading />}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/profile"
+            element={<AuthenticationGuard component={ProfilePage} />}
+          />
+          <Route
+            path="/setting"
+            element={<AuthenticationGuard component={SettingPage} />}
+          />
+          <Route path="/reserve" element={<ReservePage />} />
+          <Route path="/callback" element={<CallbackPage />} />
+        </Routes>
+      </Suspense>
     </Layout>
   );
 }

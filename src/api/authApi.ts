@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from "axios";
+import { AxiosRequestConfig } from "axios";
 import { baseAPI } from "./baseApi";
 
 export const getMe = async (accessToken: string) => {

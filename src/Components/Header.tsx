@@ -168,7 +168,10 @@ const Header = () => {
               className="h-6 w-6 text-white"
               onClick={handleClockIconCick}
             />
-            <Button onClick={() => navigate("/reserve")}>
+            <Button
+              className="hidden md:block"
+              onClick={() => navigate("/reserve")}
+            >
               {t("book_now")}
             </Button>
             {!isAuthenticated && <LoginButton />}
@@ -210,7 +213,7 @@ const Header = () => {
                     <Menu.Item>
                       {({ active }) => (
                         <a
-                        onClick={() => navigate("/setting")}
+                          onClick={() => navigate("/setting")}
                           className={classNames(
                             active ? "bg-gray-100" : "",
                             "text-gray-700 block px-4 py-2 text-sm"
