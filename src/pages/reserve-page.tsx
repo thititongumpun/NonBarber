@@ -1,16 +1,44 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "flowbite-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import Datepicker from "tailwind-datepicker-react";
+import { createReserve } from "../api/reserveApi";
 import { ReserveSchemaType, reserveSchema } from "../api/schemas/reserveSchema";
 
 type Props = {};
 
 export default function ReservePage({}: Props) {
   const { t } = useTranslation();
+  const [token, setToken] = useState<string>("");
+  const { getAccessTokenSilently } = useAuth0();
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const getToken = async () => {
+      const accessToken = await getAccessTokenSilently();
+
+      if (!isMounted) {
+        return;
+      }
+
+      if (accessToken) {
+        setToken(accessToken);
+      }
+    };
+
+    getToken();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [getAccessTokenSilently]);
   const {
     register,
     handleSubmit,
@@ -18,8 +46,35 @@ export default function ReservePage({}: Props) {
     control,
   } = useForm<ReserveSchemaType>({ resolver: zodResolver(reserveSchema) });
 
-  const onSubmit: SubmitHandler<ReserveSchemaType> = (data) =>
+  const { isLoading, mutate: createReserveFN } = useMutation(
+    (data: ReserveSchemaType) => createReserve(token, data),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("bookings");
+        toast.success("จองสำเร็จ");
+        // setOpenBookingModal(false);
+      },
+      onError: (error: any) => {
+        // setOpenBookingModal(false);
+        if (Array.isArray(error.response.data.error)) {
+          error.data.error.forEach((el: any) =>
+            toast.error(el.message, {
+              position: "top-right",
+            })
+          );
+        } else {
+          toast.error(error.response.data.message, {
+            position: "top-right",
+          });
+        }
+      },
+    }
+  );
+
+  const onSubmit: SubmitHandler<ReserveSchemaType> = (data) => {
     console.log(data);
+    createReserveFN(data);
+  };
 
   const [show, setShow] = useState<boolean>(false);
   const handleClose = (state: boolean) => {
