@@ -9,5 +9,6 @@
   "book_modal_title": "จองคิวตัดผม",
   "pick_date": "เลือกวันที่ที่ต้องการใช้บริการ",
   "discount": "ส่วนลด",
-  "submit_reserve": "ยืนยันการจอง"
+  "submit_reserve": "ยืนยันการจอง",
+  "success_reserve": "จองสำเร็จ"
 }

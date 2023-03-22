@@ -51,7 +51,7 @@ export default function ReservePage({}: Props) {
     {
       onSuccess: () => {
         queryClient.invalidateQueries("bookings");
-        toast.success("จองสำเร็จ");
+        toast.success(t('success_reserve'));
         // setOpenBookingModal(false);
       },
       onError: (error: any) => {
