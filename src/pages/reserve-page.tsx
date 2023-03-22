@@ -72,7 +72,6 @@ export default function ReservePage({}: Props) {
   );
 
   const onSubmit: SubmitHandler<ReserveSchemaType> = (data) => {
-    console.log(data);
     createReserveFN(data);
   };
 
@@ -144,7 +143,7 @@ export default function ReservePage({}: Props) {
             </label>
           </div>
           {errors.discount && <span>{errors.discount.message}</span>}
-          <Button type="submit">submit!</Button>
+          <Button type="submit">{t('submit_reserve')}</Button>
         </div>
       </form>
     </section>
