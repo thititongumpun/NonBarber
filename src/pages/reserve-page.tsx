@@ -6,6 +6,9 @@ import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import { TimePicker } from "react-samay";
+import { Timeit } from "react-timeit";
+import TimeKeeper from "react-timekeeper";
 import Datepicker from "tailwind-datepicker-react";
 import { createReserve } from "../api/reserveApi";
 import { ReserveSchemaType, reserveSchema } from "../api/schemas/reserveSchema";
@@ -14,6 +17,7 @@ type Props = {};
 
 export default function ReservePage({}: Props) {
   const { t } = useTranslation();
+  const [time, setTime] = useState("12:34pm");
   const [token, setToken] = useState<string>("");
   const { getAccessTokenSilently } = useAuth0();
   const queryClient = useQueryClient();
@@ -51,7 +55,7 @@ export default function ReservePage({}: Props) {
     {
       onSuccess: () => {
         queryClient.invalidateQueries("bookings");
-        toast.success(t('success_reserve'));
+        toast.success(t("success_reserve"));
         // setOpenBookingModal(false);
       },
       onError: (error: any) => {
@@ -109,7 +113,7 @@ export default function ReservePage({}: Props) {
   };
 
   return (
-    <section className="m-5 mx-auto flex max-h-80 max-w-lg items-center justify-center py-2">
+    <section className="m-5 mx-auto flex max-w-lg items-center justify-center py-2">
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <div className="mx-auto flex flex-col gap-y-5">
           <h1 className="text-center text-3xl">{`${t("pick_date")}`}</h1>
@@ -126,6 +130,8 @@ export default function ReservePage({}: Props) {
             )}
           />
           {errors.reserveDate && <span>{errors.reserveDate.message}</span>}
+
+          <span>Time is {time}</span>
           <div className="group relative z-0 mb-6 w-full">
             <input
               type="text"
@@ -143,7 +149,13 @@ export default function ReservePage({}: Props) {
             </label>
           </div>
           {errors.discount && <span>{errors.discount.message}</span>}
-          <Button type="submit">{t('submit_reserve')}</Button>
+          {/* <div className="absolute mt-32"> */}
+          <TimeKeeper
+            time={time}
+            onChange={(data) => setTime(data.formatted12)}
+          />
+          {/* </div> */}
+          <Button type="submit">{t("submit_reserve")}</Button>
         </div>
       </form>
     </section>
