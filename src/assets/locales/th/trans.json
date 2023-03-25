@@ -10,5 +10,7 @@
   "pick_date": "เลือกวันที่ที่ต้องการใช้บริการ",
   "discount": "ส่วนลด",
   "submit_reserve": "ยืนยันการจอง",
-  "success_reserve": "จองสำเร็จ"
+  "success_reserve": "จองสำเร็จ",
+  "show_time": "เลือกเวลา",
+  "pick_time": "เวลาที่ต้องการจอง"
 }

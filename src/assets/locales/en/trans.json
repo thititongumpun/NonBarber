@@ -10,5 +10,7 @@
   "pick_date": "Pick date for service",
   "discount": "discount",
   "submit_reserve": "Reserve",
-  "success_reserve": "Reserve Successfully"
+  "success_reserve": "Reserve Successfully",
+  "show_time": "Pick Time",
+  "pick_time": "Pick Time"
 }

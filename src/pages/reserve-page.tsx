@@ -14,9 +14,10 @@ import { ReserveSchemaType, reserveSchema } from "../api/schemas/reserveSchema";
 type Props = {};
 
 export default function ReservePage({}: Props) {
-  const { t } = useTranslation();
-  const [time, setTime] = useState("12:34pm");
+  const { t, i18n  } = useTranslation();
   const [token, setToken] = useState<string>("");
+  const [time, setTime] = useState("12:00 pm");
+  const [showTime, setShowTime] = useState(false);
   const { getAccessTokenSilently } = useAuth0();
   const queryClient = useQueryClient();
 
@@ -74,6 +75,7 @@ export default function ReservePage({}: Props) {
   );
 
   const onSubmit: SubmitHandler<ReserveSchemaType> = (data) => {
+    console.log(data);
     createReserveFN(data);
   };
 
@@ -107,7 +109,7 @@ export default function ReservePage({}: Props) {
     },
     datepickerClassNames: "top-13",
     defaultDate: new Date(),
-    language: "en",
+    language: i18n.language,
   };
 
   return (
@@ -118,6 +120,7 @@ export default function ReservePage({}: Props) {
           <Controller
             control={control}
             name="reserveDate"
+            defaultValue={new Date()}
             render={({ field: { onChange } }) => (
               <Datepicker
                 options={options}
@@ -128,31 +131,53 @@ export default function ReservePage({}: Props) {
             )}
           />
           {errors.reserveDate && <span>{errors.reserveDate.message}</span>}
-
-          <span>Time is {time}</span>
-          <div className="group relative z-0 mb-6 w-full">
+          <div className="group relative z-0 w-full">
             <input
               type="text"
               id="floating_discount"
               className="text-gray-900 border-gray-300 dark:border-gray-600 peer block w-full appearance-none border-0 border-b-2 bg-transparent py-2.5 px-0 text-sm focus:border-blue-600 focus:outline-none focus:ring-0 dark:text-white dark:focus:border-blue-500"
               placeholder=" "
-              required
+              disabled
+              defaultValue={0}
               {...register("discount")}
             />
             <label
               htmlFor="floating_discount"
-              className="text-gray-500 dark:text-gray-400 absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:font-medium peer-focus:text-blue-600 peer-focus:dark:text-blue-500"
+              className="text-gray-500 dark:text-gray-400 absolute top-1 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:font-medium peer-focus:text-blue-600 peer-focus:dark:text-blue-500"
             >
               {t("discount")}
             </label>
           </div>
           {errors.discount && <span>{errors.discount.message}</span>}
-          {/* <div className="absolute mt-32"> */}
-          <TimeKeeper
-            time={time}
-            onChange={(data) => setTime(data.formatted12)}
+          <Controller
+            control={control}
+            name="reserveTime"
+            defaultValue="12:00 pm"
+            render={({ field: { onChange, value } }) => (
+              <div className="flex flex-col items-center justify-center">
+                {showTime && (
+                  <TimeKeeper
+                    time={value}
+                    onChange={(data) => {
+                      onChange(data.formatted12);
+                      setTime(data.formatted12);
+                    }}
+                    onDoneClick={() => setShowTime(false)}
+                  />
+                )}
+                {!showTime && (
+                  <Button color="gray" onClick={() => setShowTime(true)}>
+                    {t("show_time")}
+                  </Button>
+                )}
+                <span className="m-2 p-2 text-sm">
+                  {t("pick_time")}: {time}
+                </span>
+              </div>
+            )}
           />
-          {/* </div> */}
+          {errors.reserveTime && <span>{errors.reserveTime.message}</span>}
+
           <Button type="submit">{t("submit_reserve")}</Button>
         </div>
       </form>

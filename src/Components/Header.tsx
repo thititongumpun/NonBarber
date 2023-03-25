@@ -164,6 +164,19 @@ const Header = () => {
                     <Menu.Item>
                       {({ active }) => (
                         <a
+                          onClick={() => navigate("/reserve")}
+                          className={classNames(
+                            active ? "bg-gray-100" : "",
+                            "text-gray-700 block px-4 py-2 text-sm"
+                          )}
+                        >
+                          Reserve
+                        </a>
+                      )}
+                    </Menu.Item>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <a
                           onClick={() => navigate("/profile")}
                           className={classNames(
                             active ? "bg-gray-100" : "",
