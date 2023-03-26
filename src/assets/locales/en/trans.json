@@ -12,5 +12,8 @@
   "submit_reserve": "Reserve",
   "success_reserve": "Reserve Successfully",
   "show_time": "Pick Time",
-  "pick_time": "Pick Time"
+  "pick_time": "Pick Time",
+  "confirm": "Confirm",
+  "coupon": "First time Customer ?",
+  "use_coupon": "USE CODE ILOVENONBARBER DISCOUNT 50 THB"
 }

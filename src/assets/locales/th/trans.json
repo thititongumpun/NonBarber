@@ -12,5 +12,8 @@
   "submit_reserve": "ยืนยันการจอง",
   "success_reserve": "จองสำเร็จ",
   "show_time": "เลือกเวลา",
-  "pick_time": "เวลาที่ต้องการจอง"
+  "pick_time": "เวลาที่ต้องการจอง",
+  "confirm": "ยืนยัน",
+  "coupon": "ลูกค้าใหม่ ?",
+  "use_coupon": "ใส่โค้ด ILOVENONBARBER ลด 50 บาท"
 }

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import TimeKeeper from "react-timekeeper";
 import Datepicker from "tailwind-datepicker-react";
 import { createReserve } from "../api/reserveApi";
@@ -14,7 +14,7 @@ import { ReserveSchemaType, reserveSchema } from "../api/schemas/reserveSchema";
 type Props = {};
 
 export default function ReservePage({}: Props) {
-  const { t, i18n  } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [token, setToken] = useState<string>("");
   const [time, setTime] = useState("12:00 pm");
   const [showTime, setShowTime] = useState(false);
@@ -133,13 +133,13 @@ export default function ReservePage({}: Props) {
           {errors.reserveDate && <span>{errors.reserveDate.message}</span>}
           <div className="group relative z-0 w-full">
             <input
-              type="text"
+              type="number"
               id="floating_discount"
               className="text-gray-900 border-gray-300 dark:border-gray-600 peer block w-full appearance-none border-0 border-b-2 bg-transparent py-2.5 px-0 text-sm focus:border-blue-600 focus:outline-none focus:ring-0 dark:text-white dark:focus:border-blue-500"
               placeholder=" "
-              disabled
+              readOnly
               defaultValue={0}
-              {...register("discount")}
+              {...(register("discount"))}
             />
             <label
               htmlFor="floating_discount"
@@ -159,14 +159,26 @@ export default function ReservePage({}: Props) {
                   <TimeKeeper
                     time={value}
                     onChange={(data) => {
-                      onChange(data.formatted12);
-                      setTime(data.formatted12);
+                      onChange(data.formatted24);
+                      setTime(data.formatted24);
                     }}
-                    onDoneClick={() => setShowTime(false)}
+                    doneButton={() => (
+                      <div
+                        className="cursor-pointer rounded-md bg-blue-600 p-2 text-center text-white"
+                        onClick={() => setShowTime(false)}
+                      >
+                        {t("confirm")}
+                      </div>
+                    )}
+                    coarseMinutes={30}
+                    forceCoarseMinutes
+                    hour24Mode
+                    switchToMinuteOnHourSelect
+                    disabledTimeRange={{ from: "19:00", to: "09:00" }}
                   />
                 )}
                 {!showTime && (
-                  <Button color="gray" onClick={() => setShowTime(true)}>
+                  <Button color="blue" onClick={() => setShowTime(true)}>
                     {t("show_time")}
                   </Button>
                 )}

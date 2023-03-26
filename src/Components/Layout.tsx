@@ -1,4 +1,5 @@
 import React from "react";
+import Banner from "./Banner";
 import Header from "./Header";
 
 type LayoutProps = {
@@ -10,6 +11,7 @@ const Layout = ({ children }: LayoutProps) => {
     <div className="min-h-screen bg-blue-200">
       <Header />
       {children}
+      <Banner />
     </div>
   );
 };
