@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import AuthenticationGuard from "./Auth/AuthenticationGuard";
 import Layout from "./Components/Layout";
 import CallbackPage from "./pages/callback-page";
+import CouponPage from "./pages/coupon";
 import ProfilePage from "./pages/profile-page";
 import ReservePage from "./pages/reserve-page";
 import SettingPage from "./pages/setting-page";
@@ -32,6 +33,7 @@ function App() {
             element={<AuthenticationGuard component={SettingPage} />}
           />
           <Route path="/reserve" element={<ReservePage />} />
+          <Route path="/coupon" element={<CouponPage />} />
           <Route path="/callback" element={<CallbackPage />} />
         </Routes>
       </Suspense>

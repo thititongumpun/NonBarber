@@ -13,3 +13,11 @@ export interface Reserve {
   reserveDate: Date;
   reserveTime: string;
 }
+
+export interface Coupon {
+  couponName: string;
+  discount: number;
+  isActive: boolean;
+  validFrom: Date;
+  validTo: Date;
+}

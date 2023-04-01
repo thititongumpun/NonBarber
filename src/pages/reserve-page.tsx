@@ -1,13 +1,14 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "flowbite-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import TimeKeeper from "react-timekeeper";
 import Datepicker from "tailwind-datepicker-react";
+import { getCoupon } from "../api/couponApi";
 import { createReserve } from "../api/reserveApi";
 import { ReserveSchemaType, reserveSchema } from "../api/schemas/reserveSchema";
 
@@ -21,6 +22,20 @@ export default function ReservePage({}: Props) {
   const { getAccessTokenSilently } = useAuth0();
   const queryClient = useQueryClient();
 
+  const { data: coupons } = useQuery("coupon", () => getCoupon());
+  function handleSubmitForm(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const couponName = e.currentTarget.coupon.value;
+    if (couponName === coupons![0].couponName) {
+      setCoupon(`${coupons![0].discount}`);
+    } else {
+      setCoupon("0");
+    }
+
+    // e.currentTarget.reset();
+  }
+
+  const [coupon, setCoupon] = useState("");
   useEffect(() => {
     let isMounted = true;
 
@@ -76,13 +91,17 @@ export default function ReservePage({}: Props) {
 
   const onSubmit: SubmitHandler<ReserveSchemaType> = (data) => {
     console.log(data);
-    createReserveFN(data);
+    // createReserveFN(data);
   };
 
   const [show, setShow] = useState<boolean>(false);
   const handleClose = (state: boolean) => {
     setShow(state);
   };
+
+  function handleCoupon(e: React.ChangeEvent<HTMLInputElement>) {
+    setCoupon(e.target.value);
+  }
 
   const options = {
     title: "",
@@ -113,7 +132,7 @@ export default function ReservePage({}: Props) {
   };
 
   return (
-    <section className="m-5 mx-auto flex max-w-lg items-center justify-center py-2">
+    <section className="m-5 mx-auto flex max-w-lg flex-col items-center justify-center py-2">
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <div className="mx-auto flex flex-col gap-y-5">
           <h1 className="text-center text-3xl">{`${t("pick_date")}`}</h1>
@@ -138,8 +157,9 @@ export default function ReservePage({}: Props) {
               className="text-gray-900 border-gray-300 dark:border-gray-600 peer block w-full appearance-none border-0 border-b-2 bg-transparent py-2.5 px-0 text-sm focus:border-blue-600 focus:outline-none focus:ring-0 dark:text-white dark:focus:border-blue-500"
               placeholder=" "
               readOnly
-              defaultValue={0}
-              {...(register("discount"))}
+              {...register("discount")}
+              value={coupon}
+              onChange={handleCoupon}
             />
             <label
               htmlFor="floating_discount"
@@ -189,10 +209,45 @@ export default function ReservePage({}: Props) {
             )}
           />
           {errors.reserveTime && <span>{errors.reserveTime.message}</span>}
-
           <Button type="submit">{t("submit_reserve")}</Button>
         </div>
       </form>
+      <>
+        <div className="mx-auto flex flex-col justify-center">
+          <form action="" method="POST" onSubmit={handleSubmitForm}>
+            <div className="h-13 bg-gray-100 flex w-full items-center rounded-full border bg-white pl-3">
+              <input
+                type="coupon"
+                name="coupon"
+                id="coupon"
+                placeholder="Apply coupon"
+                className="bg-gray-100 w-full appearance-none outline-none focus:outline-none active:outline-none"
+              />
+              <button
+                type="submit"
+                className="hover:bg-gray-700 flex items-center rounded-full bg-blue-800 px-3 py-1 text-sm text-white outline-none focus:outline-none active:outline-none md:px-4"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="h-6 w-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+                  />
+                </svg>
+
+                <span className="font-medium">Apply coupon</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </>
     </section>
   );
 }

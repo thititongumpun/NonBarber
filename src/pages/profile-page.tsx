@@ -3,6 +3,7 @@ import { useEffect } from "react";
 
 const ProfilePage = () => {
   const { user, getAccessTokenSilently } = useAuth0();
+  console.log(user?.nickname);
   useEffect(() => {
     let isMounted = true;
 
